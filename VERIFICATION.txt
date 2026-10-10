@@ -1,0 +1,7 @@
+Build: g++ -std=c++17 -Wall -Wextra -Wpedantic Main.cpp Buffer.cpp -o myprogram
+Build completed with no warnings.
+Both input files contain 40,933 records.
+Both runs produced byte-identical tables (57 state/postal IDs).
+All four extremes for every ID matched an independent Python calculation.
+Quoted comma fields, coordinate ties, invalid coordinates, and missing input checked.
+Doxygen PDF has NOT been generated: doxygen is unavailable in this environment.
