@@ -1,5 +1,6 @@
 #include <string>
-
+/*@brief Stores the cardinal extremes for a state
+*/
 struct State
 {
     std::string stateID; //State ID of the current state
