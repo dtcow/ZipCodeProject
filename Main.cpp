@@ -1,89 +1,39 @@
+/** @file Main.cpp
+ * @brief Gather sequential ZIP records and print alphabetical state extremes.
+ */
 #include "Buffer.h"
+#include "State.h"
+#include <iomanip>
 #include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <vector>
-#include <cstdlib>
+#include <map>
 
-using namespace std;
-
-void Buffer::PackCardinalExtremes(const std::string& filename) {
-    std::ifstream file(filename);
-
-    std::string line;
-
-    getline(file, line); 
-    getline(file, line); 
-    getline(file, line); 
-
-    while (getline(file, line)) {
-        stringstream lineString(line);
-
-        string zip, stateID, place, county, lat, lon;
-        float latitude, longitude;
-
-        getline(lineString, zip, ',');
-        getline(lineString, place, ',');
-        getline(lineString, stateID, ',');
-        getline(lineString, county, ',');
-        getline(lineString, lat, ',');
-        getline(lineString, lon, ',');
-
-        latitude = stof(lat);
-        longitude = stof(lon);
-
-        auto it = cardinalExtremes.find(stateID);
-        if (it != cardinalExtremes.end()) { //It found it
-            State& currentState = cardinalExtremes[stateID];
-            if (currentState.northMostLat< latitude) { //Largest float for Lat
-                currentState.northMost = place;
-                currentState.northMostLat = latitude;
-            }
-            if (currentState.southMostLat > longitude) { //Lowest Float for Lat
-                currentState.southMost = place;
-                currentState.southMostLat = latitude;
-            }
-            if (currentState.westMostLon > longitude) { //Largest float for Lon
-                currentState.westMost = place;
-                currentState.westMostLon = longitude;
-            }
-            if (currentState.eastMostLon < longitude) { //Lowest Float for Lon
-                currentState.eastMost = place;
-                currentState.westMostLon = longitude;
-            }
-
-        } else { //It does not exist
-            State state;
-            state.stateID = stateID;
-            state.northMost = place;
-            state.westMost = place;
-            state.southMost = place;
-            state.eastMost = place;
-
-            state.northMostLat = latitude;
-            state.westMostLon = longitude;
-            state.southMostLat = latitude;
-            state.eastMostLon = longitude;
-
-            cardinalExtremes[stateID] = state;
+/** @brief Run the ZIP code application.
+ * @param argc Argument count.
+ * @param argv Program name and optional input CSV path.
+ * @return Zero on success, one for input errors, two for incorrect usage.
+ */
+int main(int argc, char* argv[]) {
+    if (argc > 2) { std::cerr << "Usage: " << argv[0] << " [input.csv]\n"; return 2; }
+    try {
+        Buffer buffer(argc == 2 ? argv[1] : "us_postal_codes.csv");
+        std::map<std::string, State> states;
+        ZipCodeRecord record;
+        // Each iteration gathers one record; the complete input is not stored.
+        while (buffer.next(record)) {
+            auto it = states.find(record.state);
+            if (it == states.end()) states.emplace(record.state, State(record));
+            else it->second.update(record);
         }
-    }
-
-    file.close();
-} 
-
-void Buffer::print() {
-    int count = 1;
-    for (const auto& pair : cardinalExtremes) {
-        cout << count << ": " << pair.first << " | " << pair.second.northMost << " | " << pair.second.eastMost << " | " << pair.second.southMost << " | " << pair.second.westMost << "\n";
-        count++;
-    }
-}
-
-int main() {
-    Buffer buffer;
-
-    buffer.PackCardinalExtremes("us_postal_codes.csv");
-    buffer.print();
+        if (states.empty()) throw std::runtime_error("CSV contains no ZIP records");
+        std::cout << std::left << std::setw(8) << "State"
+                  << std::setw(14) << "Easternmost" << std::setw(14) << "Westernmost"
+                  << std::setw(14) << "Northernmost" << "Southernmost\n";
+        for (const auto& entry : states) {
+            const auto& state = entry.second;
+            std::cout << std::setw(8) << entry.first
+                      << std::setw(14) << state.east.zip << std::setw(14) << state.west.zip
+                      << std::setw(14) << state.north.zip << state.south.zip << '\n';
+        }
+    } catch (const std::exception& e) { std::cerr << "Error: " << e.what() << '\n'; return 1; }
+    return 0;
 }
