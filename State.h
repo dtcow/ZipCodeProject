@@ -10,14 +10,16 @@
  * Coordinate ties select the smallest ZIP so input order cannot change output.
  */
 struct State {
-    ZipCodeRecord east;  ///< Minimum longitude candidate.
-    ZipCodeRecord west;  ///< Maximum longitude candidate.
-    ZipCodeRecord north; ///< Maximum latitude candidate.
-    ZipCodeRecord south; ///< Minimum latitude candidate.
+    ZipCodeRecord east;  //< Minimum longitude candidate.
+    ZipCodeRecord west;  //< Maximum longitude candidate.
+    ZipCodeRecord north; //< Maximum latitude candidate.
+    ZipCodeRecord south; //< Minimum latitude candidate.
+
     /** @brief Initialize all candidates using the state's first record.
      * @param record Initial ZIP record.
      */
     explicit State(const ZipCodeRecord& record) : east(record), west(record), north(record), south(record) {}
+    
     /** @brief Compare a record with all four current extremes.
      * @param record New ZIP record for this state.
      */

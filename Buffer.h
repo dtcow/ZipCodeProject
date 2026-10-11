@@ -23,6 +23,7 @@ struct ZipCodeRecord {
 class Buffer {
     std::ifstream input; ///< Source stream.
     std::size_t recordNumber = 0; ///< Logical CSV record number, including header.
+
     /** @brief Read one logical CSV record.
      * @param fields Destination for parsed fields.
      * @return False at end of file; true when a record is available.
@@ -34,6 +35,7 @@ public:
      * @throws std::runtime_error If input or header is invalid.
      */
     explicit Buffer(const std::string& filename);
+    
     /** @brief Gather the next ZIP record from the sequential stream.
      * @param record Destination ZIP record.
      * @return False at end of file, otherwise true.
