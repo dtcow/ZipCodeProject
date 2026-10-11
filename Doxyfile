@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Doxyfile 1.9.8
 
 # This file describes the settings to be used by the documentation system
@@ -2861,3 +2862,19 @@ MSCGEN_TOOL            =
 # command).
 
 MSCFILE_DIRS           =
+=======
+PROJECT_NAME = "Zip Code Group Project 1.0"
+OUTPUT_DIRECTORY = docs
+INPUT = Buffer.h Buffer.cpp State.h Main.cpp
+FILE_PATTERNS = *.h *.cpp
+EXTRACT_ALL = NO
+EXTRACT_PRIVATE = YES
+SOURCE_BROWSER = YES
+INLINE_SOURCES = YES
+GENERATE_HTML = YES
+GENERATE_LATEX = YES
+USE_PDFLATEX = YES
+HAVE_DOT = NO
+WARN_IF_UNDOCUMENTED = YES
+QUIET = YES
+>>>>>>> main
