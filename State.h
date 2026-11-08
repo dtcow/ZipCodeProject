@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-#include <string>
-/*@brief Stores the cardinal extremes for a state
-*/
-struct State
-{
-    std::string stateID; //State ID of the current state
-    std::string northMost; //Northmost place in this state
-    std::string westMost; //Westmost place in this state
-    std::string southMost; //Southmost place in this state
-    std::string eastMost; //Eastmost place in this state
-=======
 /** @file State.h
  * @brief Four directional ZIP code candidates per state.
  */
@@ -26,7 +14,6 @@ struct State {
     ZipCodeRecord west;  //< Maximum longitude candidate.
     ZipCodeRecord north; //< Maximum latitude candidate.
     ZipCodeRecord south; //< Minimum latitude candidate.
->>>>>>> main
 
     /** @brief Initialize all candidates using the state's first record.
      * @param record Initial ZIP record.
