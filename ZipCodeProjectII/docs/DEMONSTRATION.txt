@@ -1,0 +1,36 @@
+$ ./myprogram --build us_postal_codes.csv us_postal_codes.zdat
+Indexed 40933 ZIP codes in us_postal_codes.zdat
+$ ./myprogram us_postal_codes.zdat -Z00501 -Z56301 -Z90210 -Z00000
+ZIP Code: 00501 | Place Name: "Holtsville" | State: NY | County: "Suffolk" | Latitude: 40.8154 | Longitude: -73.0451
+ZIP Code: 56301 | Place Name: "Saint Cloud" | State: MN | County: "Stearns" | Latitude: 45.541 | Longitude: -94.1819
+ZIP Code: 90210 | Place Name: "Beverly Hills" | State: CA | County: "Los Angeles" | Latitude: 34.0901 | Longitude: -118.4065
+ZIP Code 00000 was not found.
+Verified 40933 index offsets, all record fields, and both extremes modes.
+
+$ ./myprogram --build us_postal_codes_reordered.csv us_postal_codes_reordered.zdat
+Indexed 40933 ZIP codes in us_postal_codes_reordered.zdat
+$ ./myprogram us_postal_codes_reordered.zdat -Z00501 -Z56301 -Z90210 -Z00000
+ZIP Code: 00501 | Place Name: "Holtsville" | State: NY | County: "Suffolk" | Latitude: 40.8154 | Longitude: -73.0451
+ZIP Code: 56301 | Place Name: "Saint Cloud" | State: MN | County: "Stearns" | Latitude: 45.541 | Longitude: -94.1819
+ZIP Code: 90210 | Place Name: "Beverly Hills" | State: CA | County: "Los Angeles" | Latitude: 34.0901 | Longitude: -118.4065
+ZIP Code 00000 was not found.
+Verified 40933 index offsets, all record fields, and both extremes modes.
+
+$ ./myprogram --build us_postal_codes_by_place.csv us_postal_codes_by_place.zdat
+Indexed 40933 ZIP codes in us_postal_codes_by_place.zdat
+$ ./myprogram us_postal_codes_by_place.zdat -Z00501 -Z56301 -Z90210 -Z00000
+ZIP Code: 00501 | Place Name: "Holtsville" | State: NY | County: "Suffolk" | Latitude: 40.8154 | Longitude: -73.0451
+ZIP Code: 56301 | Place Name: "Saint Cloud" | State: MN | County: "Stearns" | Latitude: 45.541 | Longitude: -94.1819
+ZIP Code: 90210 | Place Name: "Beverly Hills" | State: CA | County: "Los Angeles" | Latitude: 34.0901 | Longitude: -118.4065
+ZIP Code 00000 was not found.
+Verified 40933 index offsets, all record fields, and both extremes modes.
+
+$ ./myprogram --build us_postal_codes_by_place_reordered.csv us_postal_codes_by_place_reordered.zdat
+Indexed 40933 ZIP codes in us_postal_codes_by_place_reordered.zdat
+$ ./myprogram us_postal_codes_by_place_reordered.zdat -Z00501 -Z56301 -Z90210 -Z00000
+ZIP Code: 00501 | Place Name: "Holtsville" | State: NY | County: "Suffolk" | Latitude: 40.8154 | Longitude: -73.0451
+ZIP Code: 56301 | Place Name: "Saint Cloud" | State: MN | County: "Stearns" | Latitude: 45.541 | Longitude: -94.1819
+ZIP Code: 90210 | Place Name: "Beverly Hills" | State: CA | County: "Los Angeles" | Latitude: 34.0901 | Longitude: -118.4065
+ZIP Code 00000 was not found.
+Verified 40933 index offsets, all record fields, and both extremes modes.
+

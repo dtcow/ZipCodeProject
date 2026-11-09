@@ -1,0 +1,9 @@
+PROJECT_NAME          = "ZIP Code Group Project 2.0"
+OUTPUT_DIRECTORY      = docs/doxygen
+INPUT                 = Main.cpp Buffer.cpp Buffer.h HeaderBuffer.cpp HeaderBuffer.h IndexEntry.h State.h
+EXTRACT_STATIC        = YES
+EXTRACT_PRIVATE       = YES
+GENERATE_HTML         = NO
+GENERATE_LATEX        = YES
+HAVE_DOT              = NO
+QUIET                 = YES
